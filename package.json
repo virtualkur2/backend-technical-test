@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/virtualkur2/backend-technical-test/issues"
   },
-  "homepage": "https://github.com/virtualkur2/backend-technical-test#readme"
+  "homepage": "https://github.com/virtualkur2/backend-technical-test#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0"
+  }
 }
