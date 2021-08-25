@@ -15,7 +15,7 @@ class Server {
 
   constructor(port: number, baseURL?: string) {
     this.port = port;
-    this.baseURL = baseURL || "/";
+    this.baseURL = baseURL || "";
     this.app = express();
   }
   /**
@@ -24,7 +24,7 @@ class Server {
   public listen() {
     this.app.listen(this.port, () => {
       console.log(
-        `App started and listening requests on TCP port: ${this.port}, at: "${this.baseURL}"`
+        `App started and listening requests on "http://localhost:${this.port}/${this.baseURL}"`
       );
     });
   }
