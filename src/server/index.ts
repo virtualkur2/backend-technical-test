@@ -1,4 +1,8 @@
-import express from "express";
+import express, { Router } from "express";
+
+type Callback<T> = {
+  (): T;
+};
 
 /**
  * Express Application Class
@@ -17,16 +21,40 @@ class Server {
     this.port = port;
     this.baseURL = baseURL || "";
     this.app = express();
+    this.initMiddlewares();
   }
+
+  /**
+   * Apply basic middlewares to app.
+   */
+  private initMiddlewares() {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+  }
+
   /**
    * Executes listen() method on Express Application
    */
-  public listen() {
-    this.app.listen(this.port, () => {
-      console.log(
-        `App started and listening requests on "http://localhost:${this.port}/${this.baseURL}"`
-      );
-    });
+  public listen(cb: Callback<void>) {
+    this.app.listen(this.port, cb);
+  }
+  /**
+   * Function Router()
+   * @returns { Router } - returns a new Router instance
+   */
+  public Router() {
+    return express.Router();
+  }
+  /**
+   * Function use()
+   *
+   * Apply a router objet into app to handle a route.
+   *
+   * @param {string} route - path to route
+   * @param {Router} router - Router object that handle the request
+   */
+  public use(route: string, router: Router) {
+    this.app.use(route, router);
   }
 }
 
